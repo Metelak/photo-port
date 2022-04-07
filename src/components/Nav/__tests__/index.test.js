@@ -2,6 +2,9 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Nav from "..";
+
+afterEach(cleanup);
+
 //declare what this test suite will be testing
 describe("Nav component", () => {
   // baseline test
@@ -14,7 +17,7 @@ describe("Nav component", () => {
     // assert value comparison
     expect(asFragment()).toMatchSnapshot();
   });
-});
+})
 //test if the camera emoji is visible
 describe("emoji is visible", () => {
   it("inserts emoji into the h2", () => {
@@ -23,7 +26,7 @@ describe("emoji is visible", () => {
     // Assert
     expect(getByLabelText("camera")).toHaveTextContent("📸");
   });
-});
+})
 //check to see if links are visible
 describe("links are visible", () => {
   it("inserts text into the links", () => {
@@ -33,4 +36,4 @@ describe("links are visible", () => {
     expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
     expect(getByTestId('about')).toHaveTextContent('About me');
   });
-});
+})
