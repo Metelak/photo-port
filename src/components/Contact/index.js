@@ -9,38 +9,35 @@ function ContactForm() {
     email: "",
     message: "",
   });
-
-  const { name, email, message } = formState;
-
   // Hook to handle the error state
   const [errorMessage, setErrorMessage] = useState("");
+  const { name, email, message } = formState;
 
-  function handleChange(e) {
-    if (e.target.name === "email") {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!errorMessage) {
+      setFormState({ [e.target.name]: e.target.value });
+      console.log('Form', formState);
+    }
+  };
+
+   const handleChange = (e) => {
+    if (e.target.name === 'email') {
       const isValid = validateEmail(e.target.value);
-      console.log(isValid);
-      // isValid conditional statement
       if (!isValid) {
-        setErrorMessage("Your email is invalid.");
+        setErrorMessage('Your email is invalid.');
+      } else {
+        setErrorMessage('');
       }
     } else {
       if (!e.target.value.length) {
         setErrorMessage(`${e.target.name} is required.`);
       } else {
-        setErrorMessage("");
+        setErrorMessage('');
       }
     }
-    if (!errorMessage) {
-      setFormState({ ...formState, [e.target.name]: e.target.value });
-    }
-  }
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(formState);
-  }
-
-  console.log(formState);
   // JSX
   return (
     <section>
